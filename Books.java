@@ -20,7 +20,7 @@ public class Books
     {
         return "Hello, my name is Booktopia";
     }
-    
+    //Lines 33 - 185 fufill requirement #2
     /**
      * Gives a response to a user statement
      * 
@@ -31,6 +31,7 @@ public class Books
     public String getResponse(String statement)
     {
         String response = "";
+        //fufills requirement #4i
         if (statement.length() == 0)
         {
             response = "Say something, please.";
@@ -134,6 +135,55 @@ public class Books
         {
             response = "Cool! Me too.";
         }
+         else if (findKeyword(statement, "adventure") >= 0)
+        {
+            response = "Into the Wild";
+        }
+         else if (findKeyword(statement, "childish") >= 0)
+        {
+            response = "Diary of a Whimpy Kid";
+        }
+         else if (findKeyword(statement, "horror") >= 0)
+        {
+            response = "Frankenstein";
+        }
+         else if (findKeyword(statement, "popular") >= 0)
+        {
+            response = "The Hunger Games";
+        }
+         else if (findKeyword(statement, "The Hunger Games") >= 0)
+        {
+            response = "Maze Runner";
+        }
+         else if (findKeyword(statement, "Maze Runner") >= 0)
+        {
+            response = "Divergent";
+        }
+         else if (findKeyword(statement, "Divergent") >= 0)
+        {
+            response = "Young Adult Novel by Veronica Roth";
+        }
+         else if (findKeyword(statement, "Computer Science") >= 0)
+        {
+            response = "The Barron's book is helpful";
+        }
+         else if (findKeyword(statement, "timeless") >= 0)
+        {
+            response = "To kill a Mockinbird";
+        }
+         else if (findKeyword(statement, "romantic") >= 0)
+        {
+            response = "Nicholas Sparks is an author of many romantic novels, such as the The Notebook";
+        }
+         else if (findKeyword(statement, "The Notebook") >= 0)
+        {
+            response = "A romantic novel by Nicholas Sparks";
+        }
+         else if (findKeyword(statement, "pages") >= 0)
+        {
+            response = "Find out for yourself!";
+        }
+        
         else if (findKeyword(statement, "do you", 0) >= 0){
                 int psn = findKeyword(statement, "do", 0);
                 if (psn >= 0
@@ -151,7 +201,14 @@ public class Books
           else if (findKeyword(statement, "like", 0) >= 0){
               response = transformLikeStatement(statement);
         }
-
+        //fufills requirement #4iv
+        else if (findKeyword(statement, "I love", 0) >= 0){
+                int psn = findKeyword(statement, "I", 0);
+                if (psn >= 0
+                        && findKeyword(statement, "love", psn) >= 0){
+                    response = transformLoveStatement(statement);
+                }
+        }
         //transform responses
         // Responses which require transformations
         
@@ -193,6 +250,8 @@ public class Books
      * @param statement the user statement, assumed to contain "I want to"
      * @return the transformed statement
      */
+    //fufills requirement #4ii
+    //Transform User's 'Do you like' statement 
     private String transformDoYouLikeStatement(String statement)
     {
         //  Remove the final period, if there is one
@@ -208,7 +267,7 @@ public class Books
         String restOfStatement = statement.substring(psn + 6).trim();
         return "Yes I " + restOfStatement + ".";
     }
-    
+    //Transforms User's 'I like' statement 
         private String transformLikeStatement(String statement)
     {
         //  Remove the final period, if there is one
@@ -224,7 +283,7 @@ public class Books
         String restOfStatement = statement.substring(psn + 1).trim();
         return "Are you sure you " + restOfStatement + "?";
     }
-    
+    //Transforms User's 'I love' statement 
        private String transformLoveStatement(String statement)
     {
         //  Remove the final period, if there is one
@@ -240,8 +299,7 @@ public class Books
         String restOfStatement = statement.substring(psn + 1).trim();
         return "Are you sure you " + restOfStatement + "?";
     }
-    
-    
+    //Transforms User's 'Why do you like' statement 
         private String transformWhyDoYouLikeStatement(String statement)
     {
         //  Remove the final period, if there is one
@@ -257,7 +315,7 @@ public class Books
         String restOfStatement = statement.substring(psn + 10).trim();
         return "I like " + restOfStatement + "because authors communicate through them.";
     }
-    
+    //Transforms User's 'I, You' statement 
     private String transformIYouStatement(String statement)
     {
         //  Remove the final period, if there is one
@@ -303,9 +361,6 @@ public class Books
     }
     //
     
-
-    
-    
     /**
      * Search for one word in phrase.  The search is not case sensitive.
      * This method will check that the given goal is not a substring of a longer string
@@ -315,6 +370,7 @@ public class Books
      * @param startPos the character of the string to begin the search at
      * @return the index of the first occurrence of goal in statement or -1 if it's not found
      */
+    //Finds the keyword
     private int findKeyword(String statement, String goal, int startPos)
     {
         String phrase = statement.trim();
@@ -370,6 +426,7 @@ public class Books
      * Pick a default response to use if nothing else fits.
      * @return a non-committal string
      */
+    //gets a random response from 11 different possible responses
     private String getRandomResponse()
     {
         final int NUMBER_OF_RESPONSES = 11;
